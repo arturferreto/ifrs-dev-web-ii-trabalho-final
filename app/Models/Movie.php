@@ -1,13 +1,15 @@
 <?php
 
+namespace Models;
+
 class Movie
 {
-    private $id = null;
-    private $name = null;
-    private $genre = null;
-    private $duration = null;
+    private int $id;
+    private string $name;
+    private string $genre;
+    private int $duration;
 
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -17,7 +19,7 @@ class Movie
         $this->id = $id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -27,7 +29,7 @@ class Movie
         $this->name = $name;
     }
 
-    public function getGenre()
+    public function getGenre(): string
     {
         return $this->genre;
     }
@@ -37,7 +39,7 @@ class Movie
         $this->genre = $genre;
     }
 
-    public function getDuration()
+    public function getDuration(): int
     {
         return $this->duration;
     }

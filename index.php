@@ -1,6 +1,3 @@
-<?php
-?>
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -11,6 +8,9 @@
     <title>Locadora de filmes</title>
 </head>
 <body>
-    <h1>Locadora NoNet</h1>
+    <h1>Links</h1>
+    <ul>
+        <li><a href="views/person/index.php">Pessoas</a></li>
+    </ul>
 </body>
 </html>
