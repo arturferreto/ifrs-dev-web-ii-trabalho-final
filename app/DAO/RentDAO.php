@@ -2,6 +2,9 @@
 
 namespace DAO;
 
+include_once '../../app/Database/Connection.php';
+include_once '../../app/Models/Rent.php';
+
 use Database\Connection;
 use Models\Rent;
 
@@ -48,12 +51,26 @@ class RentDAO
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function selectById(int $id): Rent
+    public function selectById(int $id): ?Rent
     {
         $sql = 'SELECT * FROM rents WHERE id = :id';
         $statement = Connection::getConnection()->prepare($sql);
         $statement->bindValue(':id', $id);
         $statement->execute();
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!isset($result['id'])) {
+            return null;
+        }
+
+        $rent = new Rent();
+        $rent->setId($result['id']);
+        $rent->setPersonId($result['person_id']);
+        $rent->setMovieId($result['movie_id']);
+        $rent->setRentDate($result['rent_date']);
+        $rent->setReturnDate($result['return_date']);
+        $rent->setPrice($result['price']);
+
+        return $rent;
     }
 }

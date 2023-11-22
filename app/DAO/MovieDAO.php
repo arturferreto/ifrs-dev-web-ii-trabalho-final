@@ -2,6 +2,9 @@
 
 namespace DAO;
 
+include_once '../../app/Database/Connection.php';
+include_once '../../app/Models/Movie.php';
+
 use Database\Connection;
 use Models\Movie;
 
@@ -44,12 +47,24 @@ class MovieDAO
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function selectById(int $id): ?array
+    public function selectById(int $id): ?Movie
     {
         $sql = 'SELECT * FROM movies WHERE id = :id';
         $stmt = Connection::getConnection()->prepare($sql);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!isset($result['id'])) {
+            return null;
+        }
+
+        $movie = new Movie();
+        $movie->setId($result['id']);
+        $movie->setName($result['name']);
+        $movie->setGenre($result['genre']);
+        $movie->setDuration($result['duration']);
+
+        return $movie;
     }
 }

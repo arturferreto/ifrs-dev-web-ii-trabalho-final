@@ -1,11 +1,20 @@
 <?php
 
 include_once '../../app/Controllers/PersonController.php';
+include_once '../../app/Models/Person.php';
 
-$controller = new PersonController();
+use Controllers\PersonController;
+use Models\Person;
 
 if (isset($_GET['store'])) {
-    $controller->store($_POST);
+    $person = new Person();
+    $person->setName($_POST['name']);
+    $person->setPhone($_POST['phone']);
+
+    $controller = new PersonController();
+    $controller->store($person);
+
+    header('Location: /views/person/index.php');
 }
 
 ?>
@@ -34,6 +43,7 @@ if (isset($_GET['store'])) {
         <br><br>
 
         <button type="submit">Cadastrar</button>
+        <a href="/views/person/index.php">Voltar</a>
     </form>
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace DAO;
 
 include_once '../../app/Database/Connection.php';
+include_once '../../app/Models/Person.php';
 
 use Database\Connection;
 use Models\Person;
@@ -44,12 +45,23 @@ class PersonDAO
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function selectById(int $id): Person
+    public function selectById(int $id): ?Person
     {
         $sql = 'SELECT * FROM people WHERE id = :id';
         $statement = Connection::getConnection()->prepare($sql);
         $statement->bindValue(':id', $id);
         $statement->execute();
-        return $statement->fetch(\PDO::FETCH_ASSOC);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+
+        if (!isset($result['id'])) {
+            return null;
+        }
+
+        $person = new Person();
+        $person->setId($result['id']);
+        $person->setName($result['name']);
+        $person->setPhone($result['phone']);
+
+        return $person;
     }
 }

@@ -8,9 +8,11 @@
     <title>Locadora de filmes</title>
 </head>
 <body>
-    <h1>Links</h1>
+    <h1>Menu</h1>
     <ul>
         <li><a href="views/person/index.php">Pessoas</a></li>
+        <li><a href="views/movie/index.php">Filmes</a></li>
+        <li><a href="views/rent/index.php">Locações</a></li>
     </ul>
 </body>
 </html>

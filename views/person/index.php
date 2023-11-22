@@ -1,11 +1,10 @@
 <?php
 
-use Controllers\PersonController;
-
 include_once '../../app/Controllers/PersonController.php';
 
-$controller = new PersonController();
+use Controllers\PersonController;
 
+$controller = new PersonController();
 $people = $controller->index();
 
 ?>
@@ -21,6 +20,10 @@ $people = $controller->index();
 </head>
 <body>
     <h1>Lista de clientes</h1>
+
+    <a href="/index.php">Menu</a>
+
+    <br><br>
 
     <a href="/views/person/create.php">Cadastrar</a>
 
